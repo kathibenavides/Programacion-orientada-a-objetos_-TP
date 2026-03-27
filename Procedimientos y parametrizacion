@@ -1,0 +1,17 @@
+void setup(){
+  size(800,600);
+}
+void draw(){
+  if(mousePressed){ 
+    estampa(mouseX, mouseY, 100,100);
+  }
+}
+ void estampa(float x, float y, float w, float h){
+   fill(100, 200, 100);
+   rect(x,y,w,h);
+   fill(0, 150, 150);
+   ellipse(x+w/2, y+h/2, w, h);
+   fill (255,250,0);
+   rect(x+w/4, y+h/4, w/2, height/2);
+ }
+ //Al hacer clic en cualquier parte de la pantalla aparece el grafico con ese tamaño creando multiples con un clic

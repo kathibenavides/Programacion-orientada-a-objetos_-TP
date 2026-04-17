@@ -1,0 +1,26 @@
+//Ejercicio integrador. 
+//Como ejercicio de aplicación, se propone realizar una composición (dibujo) simple utilizando figuras básicas —por ejemplo círculos, rectángulos o líneas— ubicadas mediante posiciones relativas dentro del canvas. El objetivo es que la organización visual de la composición se mantenga aunque se modifique el tamaño definido en size(), y que copie lo planificado previamente en la carpeta dibujado a mano. 
+
+//Recuerden además crear una copia de este programa en su repositorio digital, organizándolo dentro de la carpeta correspondiente a la materia. Antes de comenzar a programar, utilicen la carpeta física de trabajo para diseñar previamente la composición, realizando bocetos donde puedan pensar la ubicación relativa de los elementos dentro del canvas. La carpeta física debe completarse y mantenerse actualizada, ya que forma parte del proceso de trabajo de la materia y es un requisito importante para su aprobación. En ella deben quedar registrados los bocetos, pruebas de organización espacial y las decisiones que luego se implementarán en el programa.
+//Para resolver este ejercicio es importante aplicar dos herramientas vistas en clase. Por un lado, el uso de expresiones que combinen width y height para calcular posiciones y tamaños de los elementos (por ejemplo width/2, height*0.3, width/5, etc.). Estas expresiones permitirán definir las coordenadas de manera proporcional al tamaño del canvas en lugar de utilizar valores fijos.
+//Por otro lado, se sugiere organizar el programa utilizando funciones o procedimientos que se encarguen de dibujar algunos de los elementos de la composición. Estas funciones pueden recibir como parámetros las posiciones donde deben dibujarse las figuras, y dentro de ellas calcular las posiciones relativas de sus partes. De esta manera se separa la definición de las formas de la lógica que decide dónde ubicarlas en la pantalla.
+//Una vez construido el programa, se recomienda probarlo cambiando las dimensiones del canvas en la función size(). El objetivo es verificar que, gracias al uso de expresiones y funciones, los elementos mantengan su organización espacial y la composición continúe funcionando correctamente en distintos tamaños de ventana.
+
+//El entregable de este ejercicio consiste en compartir el link al repositorio o carpeta de Drive donde estarán organizando y guardando los programas y materiales de trabajo durante el año. Ese espacio funcionará como su archivo digital de la materia, por lo que deberá mantenerse actualizado con los ejercicios y versiones de los programas que vayan desarrollando. Además, deberá incluir un índice en formato de texto que permita identificar dónde se encuentra cada trabajo. Este índice puede organizarse por fecha, indicando brevemente el contenido o ejercicio correspondiente. El objetivo es que cualquier persona pueda recorrer el repositorio y comprender con facilidad la evolución de los trabajos y localizar rápidamente cada material.
+
+int mouseXAnt;
+int mouseYAnte;
+
+void setup(){
+  size(800,666);
+  strokeWeight(5);
+  fill(255,100,60);
+  
+}
+void draw(){
+  line(mouseX, mouseY, mouseXAnt, mouseYAnte);
+  
+  mouseXAnt= mouseX;
+  mouseYAnte= mouseY;
+
+}

@@ -1,0 +1,39 @@
+El Detector de Impactos (Punto vs. Círculo)
+Contexto: En el desarrollo de videojuegos, saber si un proyectil toca a un enemigo o si el cursor del mouse está sobre un botón circular es vital. Para esto, no usamos cuadrados, sino la distancia matemática pura.
+El Reto: Crea una función llamada hayColision que determine si un punto en el espacio está dentro del área de un círculo.
+Especificaciones de la función:
+Nombre: hayColision
+Retorno: Debe devolver un valor booleano (true si hay colisión, false si no).
+Parámetros:
+float px, float py: Las coordenadas del punto (por ejemplo, el mouse).
+float cx, float cy: Las coordenadas del centro del círculo.
+float radio: El radio del círculo. 
+Lógica Matemática: Para que un punto esté "dentro" de un círculo, la distancia entre ese punto (px, py) y el centro del círculo (cx, cy) debe ser menor o igual al radio del círculo.
+
+Crear un programa para testear la función:En el draw(), dibuja un círculo en una posición aleatoria, con radio aleatorio. Llama a tu función pasando las coordenadas del mouseX y mouseY como el "punto".Si la función devuelve true, cambia el color de relleno del círculo a rojo. Si devuelve false, mantén el círculo de color blanco.
+
+
+float radio;
+float xc, yc;
+
+void setup(){
+  size(800,600);
+  radio = random(100,200);
+  xc= random(width);
+  xc= random(height);
+}
+ void draw(){
+   if(tocaC(xc, yc, radio)){
+     fill(255,0,0);
+   }else{
+     fill(255);
+   }
+   circle(xc,yc,radio*2);}
+   boolean tocaC(float x, float y, float r){
+     float d = dist(mouseX, mouseY, x, y ); 
+  if(d < r){
+    return true;
+  }else{
+    return false;
+  }
+   }

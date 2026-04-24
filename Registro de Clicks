@@ -1,0 +1,44 @@
+Desarrollar un programa en Processing que permita registrar y visualizar posiciones en pantalla a partir de la interacción con el mouse.
+
+Cada vez que el usuario haga click, se debe dibujar un círculo en la posición actual del mouse. Estas posiciones deben almacenarse en un array, de manera que los círculos permanezcan visibles en pantalla.
+
+El programa debe mostrar como máximo 10 círculos simultáneamente. Una vez alcanzado ese límite, cada nuevo click deberá reemplazar la posición más antigua por la nueva, manteniendo siempre visibles solo los últimos 10 puntos registrados.
+
+El desafío del ejercicio está en gestionar correctamente el índice del array para reutilizar las posiciones de forma circular, sin depender únicamente de la variable de control de un for.
+
+Se espera que el programa funcione de manera continua, actualizando la visualización en cada frame.
+
+Recuerden que pueden apoyarse en la referencia oficial, el cheat sheet y los libros que les compartí. La idea es que usen esos materiales como herramientas de consulta para destrabar dudas y avanzar de forma autónoma en la resolución.
+
+ArrayList<PVector> clicks;
+final int MAX_CLICKS = 10;
+int currentIndex = 0;     
+int clickCount = 0;       
+
+void setup() {
+  size(800, 600);
+  background(255); 
+  clicks = new ArrayList<PVector>(); 
+  noStroke();
+}
+
+void draw() {
+  background(255); 
+  for (int i = 0; i < clickCount; i++) {
+    PVector p = clicks.get(i);
+    fill(255 - (i * 20), i * 20, 150); 
+    ellipse(p.x, p.y, 20, 20);
+  }
+}
+void mousePressed() {
+  PVector newClick = new PVector(mouseX, mouseY);
+  if (clickCount < MAX_CLICKS) {  
+    clicks.add(newClick);
+    clickCount++;
+  } else {
+    clicks.set(currentIndex, newClick);
+  }
+
+ 
+  currentIndex = (currentIndex + 1) % MAX_CLICKS;
+}

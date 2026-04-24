@@ -1,0 +1,49 @@
+Desarrollar un programa en que genere una grilla de rectángulos y visualice, mediante escala de grises, la distancia entre cada celda y la posición actual del mouse.
+Requisitos:
+Crear una grilla bidimensional de tamaño configurable. Cada celda de la grilla debe representarse como un rectángulo en pantalla.
+Declarar un (matriz) que almacene valores numéricos asociados a cada celda.Este array debe ser actualizado en cada ejecución de draw().
+Implementar un procedimiento que recorra la matriz y calcule, para cada celda, la distancia entre el centro del rectángulo y la posición actual del mouse. Guardar esos valores de distancia en el array bidimensional.
+Utilizar la función map() para transformar los valores de distancia en niveles de gris.
+Definir un rango donde:  Distancia mínima → color blanco (255)       Distancia máxima → color negro (0)   Valores intermedios → escala de grises proporcional
+Dibujar la grilla en cada draw(), asignando a cada rectángulo un color en función del valor almacenado en la matriz.
+El sistema debe responder en tiempo real al movimiento del mouse, actualizando continuamente los valores y la visualización.
+
+Este ejercicio busca trabajar:
+
+Uso de arrays bidimensionales
+
+Separación entre cálculo de datos y representación visual
+
+Transformación de datos mediante funciones (map)
+
+Relación entre espacio geométrico y visualización
+
+final int COLS = 40;       
+final int ROWS = 30;      
+int rectWidth;            
+int rectHeight;            
+float[][] distances;
+
+void setup() {
+  size(800, 600); 
+  rectWidth = width / COLS;
+  rectHeight = height / ROWS;
+  distances = new float[COLS][ROWS];
+  noStroke(); 
+}
+void draw() {
+  background(255); 
+  for (int i = 0; i < COLS; i++) {
+    for (int j = 0; j < ROWS; j++) {
+    
+      float centerX = i * rectWidth + rectWidth / 2;
+      float centerY = j * rectHeight + rectHeight / 2;
+      float d = dist(centerX, centerY, mouseX, mouseY);
+      distances[i][j] = d;
+      float maxPossibleDistance = dist(0, 0, width, height); 
+      float grayValue = map(distances[i][j], 0, maxPossibleDistance, 255, 0);
+      fill(grayValue); 
+      rect(i * rectWidth, j * rectHeight, rectWidth, rectHeight); 
+    }
+  }
+}

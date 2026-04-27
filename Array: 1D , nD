@@ -1,0 +1,159 @@
+Ejercicio 1: Barras tipo gráfico (Array 1D interactivo)
+Desarrollar un programa en Processing que utilice un array de una dimensión para representar un conjunto de barras verticales en pantalla.
+Cada posición del array representa una barra. El valor almacenado en cada índice define la altura de esa barra.
+El sistema debe permitir modificar los valores del array de manera interactiva utilizando el mouse, simulando el funcionamiento de un ecualizador.
+Declarar un array para almacenar las alturas de las barras.
+Dibujar todas las barras en pantalla, distribuidas horizontalmente de manera uniforme.
+Detectar la posición del mouse en X para determinar qué barra se está modificando.
+La altura de la barra seleccionada debe depender de la posición del mouse en Y.
+Limitar los valores para que las barras no se dibujen fuera de la pantalla.
+Actualizar el dibujo en tiempo real.
+Comprender cómo un array puede utilizarse para almacenar y manipular múltiples valores relacionados,
+y cómo vincular esos datos con una representación visual interactiva.
+
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+Ejercicio 2: Laberinto con estructura multidimensional
+Desarrollar un programa en Processing que genere y dibuje un laberinto simple a partir de una estructura de datos multidimensional.
+Cada celda del laberinto debe contener información sobre sus paredes y posibles diagonales.
+Esta información se almacenará en un array multidimensional. De que tipo de dato podríamos crearlo?. cuantas dimensiones necesito?
+La estructura debe permitir definir, para cada celda, si se dibuja o no cada uno de sus lados, incluida las diagonales
+Inicializar el array con valores que definan un conjunto de celdas.
+Dibujar cada celda en pantalla respetando la información almacenada.
+Cada pared o diagonal debe dibujarse solo si su valor es true.
+Organizar visualmente las celdas formando una grilla.
+Generar los valores de forma aleatoria.
+Comprender cómo utilizar arrays multidimensionales para representar estructuras complejas, donde cada elemento contiene múltiples atributos 
+que afectan su representación visual.
+
+EJERCICIO 1:
+final int NUM_BARRAS = 50; 
+float[] alturas;           
+float anchoBarra;          
+int barraSeleccionada = -1; 
+
+void setup() {
+  size(800, 400); 
+  alturas = new float[NUM_BARRAS];
+  anchoBarra = (float)width / NUM_BARRAS; 
+  
+  for (int i = 0; i < NUM_BARRAS; i++) {
+    alturas[i] = height / 2; 
+  }
+  
+  noStroke(); 
+}
+
+void draw() {
+  background(50); 
+
+  if (mousePressed) {
+    barraSeleccionada = (int)(mouseX / anchoBarra);
+    
+    if (barraSeleccionada >= 0 && barraSeleccionada < NUM_BARRAS) {
+      alturas[barraSeleccionada] = height - mouseY;
+      alturas[barraSeleccionada] = constrain(alturas[barraSeleccionada], 0, height);
+    }
+  } else {
+    barraSeleccionada = -1; 
+  }
+
+  for (int i = 0; i < NUM_BARRAS; i++) {
+    
+    float x = i * anchoBarra;
+    
+    if (i == barraSeleccionada) {
+      fill(255, 0, 0); 
+    } else {
+      fill(0, 200, 0); 
+    }
+    
+    rect(x, height - alturas[i], anchoBarra, alturas[i]);
+  }
+}
+
+void mouseReleased() {
+  barraSeleccionada = -1; 
+}
+
+EJERCICIO 2:
+class Celda {
+  boolean paredNorte, paredSur, paredEste, paredOeste;
+  boolean diagonalNO, diagonalNE, diagonalSO, diagonalSE;
+
+  Celda() {
+   
+    paredNorte = random(1) > 0.5;
+    paredSur = random(1) > 0.5;
+    paredEste = random(1) > 0.5;
+    paredOeste = random(1) > 0.5;
+    diagonalNO = random(1) > 0.8; 
+    diagonalNE = random(1) > 0.8;
+    diagonalSO = random(1) > 0.8;
+    diagonalSE = random(1) > 0.8;
+  }
+}
+
+final int COLS = 20;     
+final int ROWS = 15;     
+
+Celda[][] laberinto;     
+int tamanoCelda;         
+void setup() {
+  size(800, 600); 
+  tamanoCelda = min(width / COLS, height / ROWS); 
+  laberinto = new Celda[COLS][ROWS];
+  
+  for (int i = 0; i < COLS; i++) {
+    for (int j = 0; j < ROWS; j++) {
+      laberinto[i][j] = new Celda();
+    }
+  }
+  stroke(255, 0, 0); 
+  strokeWeight(2);   
+  noFill();          
+}
+
+void draw() {
+  background(0); 
+  for (int i = 0; i < COLS; i++) {
+    for (int j = 0; j < ROWS; j++) {
+      float x = i * tamanoCelda;
+      float y = j * tamanoCelda;
+      Celda celdaActual = laberinto[i][j];
+
+      if (celdaActual.paredNorte) {
+        line(x, y, x + tamanoCelda, y); 
+      }
+      if (celdaActual.paredSur) {
+        line(x, y + tamanoCelda, x + tamanoCelda, y + tamanoCelda); 
+      }
+      if (celdaActual.paredEste) {
+        line(x + tamanoCelda, y, x + tamanoCelda, y + tamanoCelda); 
+      }
+      if (celdaActual.paredOeste) {
+        line(x, y, x, y + tamanoCelda); 
+      }
+      stroke(0, 0, 255); 
+      if (celdaActual.diagonalNO) {
+        line(x, y + tamanoCelda, x + tamanoCelda, y); 
+      }
+      if (celdaActual.diagonalNE) {
+        line(x, y, x + tamanoCelda, y + tamanoCelda);
+      }
+      if (celdaActual.diagonalSO) {
+        line(x, y + tamanoCelda, x + tamanoCelda, y);
+      }
+      if (celdaActual.diagonalSE) {
+        line(x, y, x + tamanoCelda, y + tamanoCelda);
+      }
+      stroke(255, 0, 0); 
+    }
+  }
+}
+void mousePressed() {
+  for (int i = 0; i < COLS; i++) {
+    for (int j = 0; j < ROWS; j++) {
+      laberinto[i][j] = new Celda();
+    }
+  }
+}

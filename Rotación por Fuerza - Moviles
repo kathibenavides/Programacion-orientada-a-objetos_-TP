@@ -1,0 +1,26 @@
+Ejercicio 1: Rotación por Fuerza
+Implementar un objeto móvil que reciba una fuerza externa y, en lugar de solo desplazarse,
+experimente una aceleración angular que lo haga rotar al moverse por la pantalla.
+
+Clase Movil
+class Movil {
+  
+  PVector acel=new PVector(0, 0);
+  PVector pos;
+}
+  void agregarFuerza(PVector F){
+    acel.add(F);
+  }
+  void ascelerar(){
+   PVector R= vel.copy();
+   R.normal();
+   Movil(float origenX, float origenY) {
+   pos= new PVector(origenX, origenY);
+  }
+  void mostrar() {
+    fill(255);
+    circle(pos.x, pos.y, d);
+  }
+  P}Vector MXY= new PVector(0,0);
+  }
+  

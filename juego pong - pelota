@@ -1,0 +1,35 @@
+Pelota p;
+void setup(){
+  size(600,800);
+  P =new Pelota();
+}
+ void draw(){
+   p.mover();
+   p.rebotar();
+   p.mostrar();
+ }
+
+ //pt.2
+
+ Class Pelota{
+  PVector pos;
+  PVector vel;
+  float c=100;
+  color c=color(255);
+  
+  Pelota(){
+    pos= new PVector(width/2,height/2);
+    vel= new PVector(1,1);
+  }
+  void mover(){
+    pos.add(vel);
+  }
+  void mostrar(){
+    circle(pos.x,pos.y,r);
+  }
+  void rebotar(){
+    if(pos.y>height=r || pos.y<r){
+      vel.y= vel.y*-1;
+    }
+  }
+}

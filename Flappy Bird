@@ -1,10 +1,11 @@
 ArrayList <cuadrado> tubos;
 Pelota bird; Float UltimaPar = 0;
 PVector G = new PVector(0,2);
+PVector salto= new PVector(0,-2);
 void setuo(){
   size(800,600);
   tubos= new ArrayList <cuadrado>();
-  bird = newPelota (100, h/2);
+  bird = newPelota (100, h/2); 
 }
 void draw(){
   background(0);
@@ -29,8 +30,13 @@ void Agregartubos(){
   float tActual = millis();
   float dt=tActual - UltimoPar;
   if(dt>5000){
-    tubos.add(newCuadrado( , ));
-    tubos.add(newCuadrado(  ,  ));
+    tubos.add(newCuadrado(300 ,300 ));
+    tubos.add(newCuadrado( 400 ,400  ));
     UltimoPar= tActual;
   }
+}
+void moussePressed(){
+if(moussePressed){
+bird.addFuerza(salto);
+}
 }

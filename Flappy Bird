@@ -1,0 +1,36 @@
+ArrayList <cuadrado> tubos;
+Pelota bird; Float UltimaPar = 0;
+PVector G = new PVector(0,2);
+void setuo(){
+  size(800,600);
+  tubos= new ArrayList <cuadrado>();
+  bird = newPelota (100, h/2);
+}
+void draw(){
+  background(0);
+AgregarTubos();
+  bird.addFuerza(G);
+  bird.mover();
+  borrarTubos();
+  for(Cuadrado t:tubos){
+    t.mover();
+    t.mostrar();
+  }
+  bird.mostrar();
+}
+void borrarTubos(){
+  for(int i=tubos.size()-1; i=>0; i--);
+  Cuadrado Aux = tubos.get(i);
+  if(Aux.pos.x<0){
+    tubos.remove(i);
+  }
+}
+void Agregartubos(){
+  float tActual = millis();
+  float dt=tActual - UltimoPar;
+  if(dt>5000){
+    tubos.add(newCuadrado( , ));
+    tubos.add(newCuadrado(  ,  ));
+    UltimoPar= tActual;
+  }
+}
